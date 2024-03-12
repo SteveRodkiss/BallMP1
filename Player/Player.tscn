@@ -31,5 +31,20 @@ replication_config = SubResource("SceneReplicationConfig_nmxqh")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45465, 0)
+pixel_size = 0.05
 billboard = 2
 text = "Frank"
+
+[node name="PlayerSettingsUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="PlayerSettingsUI"]
+layout_mode = 0
+offset_right = 221.0
+offset_bottom = 31.0
+placeholder_text = "nickname"
+
+[connection signal="text_changed" from="PlayerSettingsUI/LineEdit" to="." method="_on_line_edit_text_changed"]

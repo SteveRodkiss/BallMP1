@@ -7,8 +7,17 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var player_nickname = ""
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+	if is_multiplayer_authority():
+		$PlayerSettingsUI.show()
+	else:
+		$PlayerSettingsUI.hide()
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -29,3 +38,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	player_nickname = new_text
+	$Label3D.text = player_nickname

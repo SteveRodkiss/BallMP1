@@ -41,9 +41,4 @@ func on_player_disconnected(id:int):
 	if player:
 		player.queue_free()
 
-
-@rpc( "any_peer", "reliable")
-func update_player_info(id, new_name):
-	players[id] = new_name
-	print("Update player info: ", players)
 	
