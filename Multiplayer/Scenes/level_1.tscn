@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d22kpgcv8qfd2"]
+[gd_scene load_steps=7 format=3 uid="uid://d22kpgcv8qfd2"]
 
 [ext_resource type="Script" path="res://Multiplayer/Scripts/MultiplayerManager.gd" id="1_3v02r"]
 [ext_resource type="Script" path="res://Multiplayer/Scripts/PlayerSpawner.gd" id="2_sur5w"]
+[ext_resource type="PackedScene" uid="uid://drxs2t27nggpe" path="res://Player/Player.tscn" id="3_7g2u7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kc3s"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,25 +39,34 @@ grow_vertical = 2
 
 [node name="Serverbutton" type="Button" parent="Multiplayer/MultiplayerUI"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 16.0
-offset_right = 109.0
-offset_bottom = 47.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 74.0
+offset_bottom = 39.0
 text = "Server"
 
 [node name="JoinButton" type="Button" parent="Multiplayer/MultiplayerUI"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 59.0
-offset_right = 89.0
-offset_bottom = 90.0
+offset_left = 216.0
+offset_top = 56.0
+offset_right = 254.0
+offset_bottom = 87.0
 text = "Join
 "
 
+[node name="NickNameLineEdit" type="LineEdit" parent="Multiplayer/MultiplayerUI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 192.0
+offset_bottom = 87.0
+placeholder_text = "nickname"
+max_length = 16
+
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="Multiplayer"]
-_spawnable_scenes = PackedStringArray("res://Player/Player.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("2_sur5w")
+player_prefab = ExtResource("3_7g2u7")
 
 [node name="Level" type="Node3D" parent="."]
 

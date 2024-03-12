@@ -13,6 +13,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("Label3D:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_pmdf6")
@@ -25,3 +28,8 @@ shape = SubResource("CapsuleShape3D_nocyp")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_nmxqh")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45465, 0)
+billboard = 2
+text = "Frank"
