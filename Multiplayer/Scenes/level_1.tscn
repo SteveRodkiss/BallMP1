@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://d22kpgcv8qfd2"]
+
+[ext_resource type="Script" path="res://Multiplayer/Scripts/MultiplayerManager.gd" id="1_3v02r"]
+[ext_resource type="Script" path="res://Multiplayer/Scripts/PlayerSpawner.gd" id="2_sur5w"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kc3s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_76uvc"]
+sky_material = SubResource("ProceduralSkyMaterial_7kc3s")
+
+[sub_resource type="Environment" id="Environment_c41re"]
+background_mode = 2
+sky = SubResource("Sky_76uvc")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c41re")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Multiplayer" type="Node3D" parent="."]
+script = ExtResource("1_3v02r")
+
+[node name="MultiplayerUI" type="Control" parent="Multiplayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Serverbutton" type="Button" parent="Multiplayer/MultiplayerUI"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 16.0
+offset_right = 109.0
+offset_bottom = 47.0
+text = "Server"
+
+[node name="JoinButton" type="Button" parent="Multiplayer/MultiplayerUI"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 59.0
+offset_right = 89.0
+offset_bottom = 90.0
+text = "Join
+"
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Multiplayer"]
+_spawnable_scenes = PackedStringArray("res://Player/Player.tscn")
+spawn_path = NodePath("..")
+script = ExtResource("2_sur5w")
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, -1)
+use_collision = true
+size = Vector3(15, 1, 11)
+
+[node name="Camera3D" type="Camera3D" parent="Level"]
+transform = Transform3D(0.864732, -0.250341, 0.435394, 0, 0.866915, 0.498456, -0.502234, -0.43103, 0.749649, 5.98421, 5.49746, 7.84173)
+
+[connection signal="pressed" from="Multiplayer/MultiplayerUI/Serverbutton" to="Multiplayer" method="create_server"]
+[connection signal="pressed" from="Multiplayer/MultiplayerUI/JoinButton" to="Multiplayer" method="join_game"]
